@@ -59,6 +59,19 @@ export function get<Type>(
     .then(() => req.result);
 }
 
+export function getAll<Type>(
+  query: IDBValidKey | IDBKeyRange,
+  count: number,
+  store = getDefaultStore()
+): Promise<Type> {
+  let req: IDBRequest;
+  return store
+    ._withIDBStore("readonly", (store) => {
+      req = store.getAll(query, count);
+    })
+    .then(() => req.result);
+}
+
 export function set(
   key: IDBValidKey,
   value: any,
