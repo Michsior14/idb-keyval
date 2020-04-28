@@ -42,7 +42,7 @@ function get(key, store = getDefaultStore()) {
     })
         .then(() => req.result);
 }
-function getAll(query, count, store = getDefaultStore()) {
+function getAll(store = getDefaultStore(), query, count) {
     let req;
     return store
         ._withIDBStore("readonly", (store) => {
