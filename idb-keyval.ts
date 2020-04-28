@@ -60,9 +60,9 @@ export function get<Type>(
 }
 
 export function getAll<Type>(
-  query: IDBValidKey | IDBKeyRange,
-  count: number,
-  store = getDefaultStore()
+  store = getDefaultStore(),
+  query?: IDBValidKey | IDBKeyRange,
+  count?: number
 ): Promise<Type> {
   let req: IDBRequest;
   return store
