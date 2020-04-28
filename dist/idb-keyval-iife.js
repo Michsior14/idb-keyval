@@ -10,10 +10,9 @@ const promiseStore = (openreq, storeName) => new Promise((resolve, reject) => {
     };
 });
 class Store {
-    constructor(dbName = 'keyval-store', storeName = 'keyval') {
+    constructor(dbName = "keyval-store", storeName = "keyval") {
         this.storeName = storeName;
-        this._dbp = promiseStore(indexedDB.open(dbName), storeName)
-            .then(db => {
+        this._dbp = promiseStore(indexedDB.open(dbName), storeName).then((db) => {
             db.onversionchange = () => db.close();
             if (db.objectStoreNames.contains(storeName))
                 return db;
@@ -21,7 +20,7 @@ class Store {
         });
     }
     _withIDBStore(type, callback) {
-        return this._dbp.then(db => new Promise((resolve, reject) => {
+        return this._dbp.then((db) => new Promise((resolve, reject) => {
             const transaction = db.transaction(this.storeName, type);
             transaction.oncomplete = () => resolve();
             transaction.onabort = transaction.onerror = () => reject(transaction.error);
@@ -37,28 +36,39 @@ function getDefaultStore() {
 }
 function get(key, store = getDefaultStore()) {
     let req;
-    return store._withIDBStore('readonly', store => {
+    return store
+        ._withIDBStore("readonly", (store) => {
         req = store.get(key);
-    }).then(() => req.result);
+    })
+        .then(() => req.result);
+}
+function getAll(query, count, store = getDefaultStore()) {
+    let req;
+    return store
+        ._withIDBStore("readonly", (store) => {
+        req = store.getAll(query, count);
+    })
+        .then(() => req.result);
 }
 function set(key, value, store = getDefaultStore()) {
-    return store._withIDBStore('readwrite', store => {
+    return store._withIDBStore("readwrite", (store) => {
         store.put(value, key);
     });
 }
 function del(key, store = getDefaultStore()) {
-    return store._withIDBStore('readwrite', store => {
+    return store._withIDBStore("readwrite", (store) => {
         store.delete(key);
     });
 }
 function clear(store = getDefaultStore()) {
-    return store._withIDBStore('readwrite', store => {
+    return store._withIDBStore("readwrite", (store) => {
         store.clear();
     });
 }
 function keys(store = getDefaultStore()) {
     const keys = [];
-    return store._withIDBStore('readonly', store => {
+    return store
+        ._withIDBStore("readonly", (store) => {
         // This would be store.getAllKeys(), but it isn't supported by Edge or Safari.
         // And openKeyCursor isn't supported by Safari.
         (store.openKeyCursor || store.openCursor).call(store).onsuccess = function () {
@@ -67,11 +77,13 @@ function keys(store = getDefaultStore()) {
             keys.push(this.result.key);
             this.result.continue();
         };
-    }).then(() => keys);
+    })
+        .then(() => keys);
 }
 
 exports.Store = Store;
 exports.get = get;
+exports.getAll = getAll;
 exports.set = set;
 exports.del = del;
 exports.clear = clear;
