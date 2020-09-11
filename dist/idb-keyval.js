@@ -1,7 +1,3 @@
-'use strict';
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
 const promiseStore = (openreq, storeName) => new Promise((resolve, reject) => {
     openreq.onerror = () => reject(openreq.error);
     openreq.onsuccess = () => resolve(openreq.result);
@@ -82,10 +78,4 @@ function keys(store = getDefaultStore()) {
         .then(() => keys);
 }
 
-exports.Store = Store;
-exports.clear = clear;
-exports.del = del;
-exports.get = get;
-exports.getAll = getAll;
-exports.keys = keys;
-exports.set = set;
+export { Store, clear, del, get, getAll, keys, set };

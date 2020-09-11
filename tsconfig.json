@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
     "alwaysStrict": true,
-    "module": "esnext",
+    "module": "es2015",
     "strict": true,
-    "target": "esnext",
-    "declaration": true
+    "target": "es2015",
+    "declaration": false
   }
 }

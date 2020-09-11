@@ -32,9 +32,8 @@ export class Store {
         new Promise<void>((resolve, reject) => {
           const transaction = db.transaction(this.storeName, type);
           transaction.oncomplete = () => resolve();
-          transaction.onerror = () => reject(transaction.error);
-          transaction.onabort = (event) =>
-            reject((<IDBRequest>event.target).error);
+          transaction.onerror = transaction.onabort = (event) =>
+            reject(transaction?.error ?? (<IDBRequest>event.target)?.error);
           callback(transaction.objectStore(this.storeName));
         })
     );

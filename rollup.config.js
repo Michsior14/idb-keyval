@@ -1,20 +1,37 @@
-import typescript from 'rollup-plugin-typescript2';
+import typescript from "@rollup/plugin-typescript";
 
-export default {
-  input: 'idb-keyval.ts',
+const defaults = {
+  input: "idb-keyval.ts",
   plugins: [typescript()],
-  output: [{
-    file: 'dist/idb-keyval-iife.js',
-    format: 'iife',
-    name: 'idbKeyval'
-  }, {
-    file: 'dist/idb-keyval-cjs.js',
-    format: 'cjs'
-  }, {
-    file: 'dist/idb-keyval.mjs',
-    format: 'es'
-  }, {
-    file: 'dist/idb-keyval-amd.js',
-    format: 'amd',
-  }]
 };
+
+export default [
+  {
+    ...defaults,
+    output: [
+      {
+        file: "dist/idb-keyval-iife.js",
+        format: "iife",
+        name: "idbKeyval",
+      },
+      {
+        file: "dist/idb-keyval-cjs.js",
+        format: "cjs",
+      },
+      {
+        file: "dist/idb-keyval-amd.js",
+        format: "amd",
+      },
+    ],
+  },
+  {
+    ...defaults,
+    plugins: [typescript({ declaration: true, declarationDir: "dist" })],
+    output: [
+      {
+        dir: "dist",
+        format: "es",
+      },
+    ],
+  },
+];
