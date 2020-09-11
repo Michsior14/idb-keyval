@@ -11,13 +11,13 @@ This is only a keyval store. If you need to do more complex things like iteratio
 
 ## Usage
 
-### set:
+### set
 
 ```js
-import { set } from 'idb-keyval';
+import { set } from "@michsior14/idb-keyval";
 
-set('hello', 'world');
-set('foo', 'bar');
+set("hello", "world");
+set("foo", "bar");
 ```
 
 Since this is IDB-backed, you can store anything structured-clonable (numbers, arrays, objects, dates, blobs etc).
@@ -25,66 +25,67 @@ Since this is IDB-backed, you can store anything structured-clonable (numbers, a
 All methods return promises:
 
 ```js
-import { set } from 'idb-keyval';
+import { set } from "@michsior14/idb-keyval";
 
-set('hello', 'world')
-  .then(() => console.log('It worked!'))
-  .catch(err => console.log('It failed!', err));
+set("hello", "world")
+  .then(() => console.log("It worked!"))
+  .catch((err) => console.log("It failed!", err));
 ```
 
-### get:
+### get
 
 ```js
-import { get } from 'idb-keyval';
+import { get } from "@michsior14/idb-keyval";
 
 // logs: "world"
-get('hello').then(val => console.log(val));
+get("hello").then((val) => console.log(val));
 ```
 
 If there is no 'hello' key, then `val` will be `undefined`.
 
-### getAll:
+### getAll
+
 ```js
-import { getAll } from 'idb-keyval';
+import { getAll } from "@michsior14/idb-keyval";
 
 // logs: [ "bar", "world" ]
-getAll().then(val => console.log(val));
+getAll().then((val) => console.log(val));
 ```
 
-### keys:
+### keys
 
 ```js
-import { keys } from 'idb-keyval';
+import { keys } from "@michsior14/idb-keyval";
 
 // logs: ["hello", "foo"]
-keys().then(keys => console.log(keys));
+keys().then((keys) => console.log(keys));
 ```
 
-### del:
+### del
 
 ```js
-import { del } from 'idb-keyval';
+import { del } from "@michsior14/idb-keyval";
 
-del('hello');
+del("hello");
 ```
 
-### clear:
+### clear
 
 ```js
-import { clear } from 'idb-keyval';
+import { clear } from "@michsior14/idb-keyval";
 
 clear();
 ```
 
-### Custom stores:
+### Custom stores
 
 By default, the methods above use an IndexedDB database named `keyval-store` and an object store named `keyval`. You can create your own store, and pass it as an additional parameter to any of the above methods:
 
 ```js
-import { Store, set } from 'idb-keyval';
+import { Store, set } from "@michsior14/idb-keyval";
 
-const customStore = new Store('custom-db-name', 'custom-store-name');
-set('foo', 'bar', customStore);
+const customStore = new Store("custom-db-name", "custom-store-name");
+set("foo", "bar", customStore);
 ```
 
 That's it!
@@ -94,57 +95,26 @@ That's it!
 ### Via npm + webpack/rollup
 
 ```sh
-npm install idb-keyval
+npm install @michsior14/idb-keyval
 ```
 
-Now you can require/import `idb-keyval`:
+Now you can require/import `@michsior14/idb-keyval`:
 
 ```js
-import { get, set } from 'idb-keyval';
+import { get, set } from "@michsior14/idb-keyval";
 ```
 
 If you're targeting older versions of IE, you may have more luck with:
 
 ```js
-const idb = require('idb-keyval/dist/idb-keyval-cjs-compat.min.js');
+const idb = require("@michsior14/idb-keyval/dist/idb-keyval-cjs-compat.min.js");
 ```
 
 ### Via `<script>`
 
-* `dist/idb-keyval.mjs` is a valid JS module.
-* `dist/idb-keyval-iife.js` can be used in browsers that don't support modules. `idbKeyval` is created as a global.
-* `dist/idb-keyval-iife.min.js` As above, but minified.
-* `dist/idb-keyval-iife-compat.min.js` As above, but works in older browsers such as IE 10.
-* `dist/idb-keyval-amd.js` is an AMD module.
-* `dist/idb-keyval-amd.min.js` As above, but minified.
-
-These built versions are also available on jsDelivr, e.g.:
-
-```html
-<script src="https://cdn.jsdelivr.net/npm/idb-keyval@3/dist/idb-keyval-iife.min.js"></script>
-<!-- Or in modern browsers: -->
-<script type="module">
-  import { get, set } from 'https://cdn.jsdelivr.net/npm/idb-keyval@3/dist/idb-keyval.mjs';
-</script>
-```
-
-## Updating from 2.x
-
-2.x exported an object with methods:
-
-```js
-// This no longer works in 3.x
-import idbKeyval from 'idb-keyval';
-
-idbKeyval.set('foo', 'bar');
-```
-
-Whereas in 3.x you import the methods directly:
-
-```js
-import { set } from 'idb-keyval';
-
-set('foo', 'bar');
-```
-
-This is better for minification, and allows tree shaking.
+- `dist/idb-keyval.mjs` is a valid JS module.
+- `dist/idb-keyval-iife.js` can be used in browsers that don't support modules. `idbKeyval` is created as a global.
+- `dist/idb-keyval-iife.min.js` As above, but minified.
+- `dist/idb-keyval-iife-compat.min.js` As above, but works in older browsers such as IE 10.
+- `dist/idb-keyval-amd.js` is an AMD module.
+- `dist/idb-keyval-amd.min.js` As above, but minified.
