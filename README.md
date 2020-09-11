@@ -14,7 +14,7 @@ This is only a keyval store. If you need to do more complex things like iteratio
 ### set
 
 ```js
-import { set } from "@michsior14/idb-keyval";
+import { set } from "@michaukrieg/idb-keyval";
 
 set("hello", "world");
 set("foo", "bar");
@@ -25,7 +25,7 @@ Since this is IDB-backed, you can store anything structured-clonable (numbers, a
 All methods return promises:
 
 ```js
-import { set } from "@michsior14/idb-keyval";
+import { set } from "@michaukrieg/idb-keyval";
 
 set("hello", "world")
   .then(() => console.log("It worked!"))
@@ -35,7 +35,7 @@ set("hello", "world")
 ### get
 
 ```js
-import { get } from "@michsior14/idb-keyval";
+import { get } from "@michaukrieg/idb-keyval";
 
 // logs: "world"
 get("hello").then((val) => console.log(val));
@@ -46,7 +46,7 @@ If there is no 'hello' key, then `val` will be `undefined`.
 ### getAll
 
 ```js
-import { getAll } from "@michsior14/idb-keyval";
+import { getAll } from "@michaukrieg/idb-keyval";
 
 // logs: [ "bar", "world" ]
 getAll().then((val) => console.log(val));
@@ -55,7 +55,7 @@ getAll().then((val) => console.log(val));
 ### keys
 
 ```js
-import { keys } from "@michsior14/idb-keyval";
+import { keys } from "@michaukrieg/idb-keyval";
 
 // logs: ["hello", "foo"]
 keys().then((keys) => console.log(keys));
@@ -64,7 +64,7 @@ keys().then((keys) => console.log(keys));
 ### del
 
 ```js
-import { del } from "@michsior14/idb-keyval";
+import { del } from "@michaukrieg/idb-keyval";
 
 del("hello");
 ```
@@ -72,7 +72,7 @@ del("hello");
 ### clear
 
 ```js
-import { clear } from "@michsior14/idb-keyval";
+import { clear } from "@michaukrieg/idb-keyval";
 
 clear();
 ```
@@ -82,7 +82,7 @@ clear();
 By default, the methods above use an IndexedDB database named `keyval-store` and an object store named `keyval`. You can create your own store, and pass it as an additional parameter to any of the above methods:
 
 ```js
-import { Store, set } from "@michsior14/idb-keyval";
+import { Store, set } from "@michaukrieg/idb-keyval";
 
 const customStore = new Store("custom-db-name", "custom-store-name");
 set("foo", "bar", customStore);
@@ -95,19 +95,19 @@ That's it!
 ### Via npm + webpack/rollup
 
 ```sh
-npm install @michsior14/idb-keyval
+npm install @michaukrieg/idb-keyval
 ```
 
-Now you can require/import `@michsior14/idb-keyval`:
+Now you can require/import `@michaukrieg/idb-keyval`:
 
 ```js
-import { get, set } from "@michsior14/idb-keyval";
+import { get, set } from "@michaukrieg/idb-keyval";
 ```
 
 If you're targeting older versions of IE, you may have more luck with:
 
 ```js
-const idb = require("@michsior14/idb-keyval/dist/idb-keyval-cjs-compat.min.js");
+const idb = require("@michaukrieg/idb-keyval/dist/idb-keyval-cjs-compat.min.js");
 ```
 
 ### Via `<script>`
