@@ -1,7 +1,6 @@
 # IDB-Keyval
 
-[![npm](https://img.shields.io/npm/v/idb-keyval.svg)](https://www.npmjs.com/package/idb-keyval)
-[![size](http://img.badgesize.io/https://cdn.jsdelivr.net/npm/idb-keyval/dist/idb-keyval-iife.min.js?compression=gzip)](http://img.badgesize.io/https://cdn.jsdelivr.net/npm/idb-keyval/dist/idb-keyval-iife.min.js)
+[![npm](https://img.shields.io/npm/v/@michaukrieg/idb-keyval.svg)](https://www.npmjs.com/package/@michaukrieg/idb-keyval)
 
 This is a super-simple-small promise-based keyval store implemented with IndexedDB, largely based on [async-storage by Mozilla](https://github.com/mozilla-b2g/gaia/blob/master/shared/js/async_storage.js).
 
@@ -112,7 +111,7 @@ const idb = require("@michaukrieg/idb-keyval/dist/idb-keyval-cjs-compat.min.js")
 
 ### Via `<script>`
 
-- `dist/idb-keyval.mjs` is a valid JS module.
+- `dist/idb-keyval.js` is a valid JS module.
 - `dist/idb-keyval-iife.js` can be used in browsers that don't support modules. `idbKeyval` is created as a global.
 - `dist/idb-keyval-iife.min.js` As above, but minified.
 - `dist/idb-keyval-iife-compat.min.js` As above, but works in older browsers such as IE 10.
